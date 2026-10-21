@@ -1,16 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\FilamentoController;
 use App\Http\Controllers\Api\ProdutoController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\CotacaoController;
 use Illuminate\Support\Facades\Route;
 
 Route::apiResource('/produtos', ProdutoController::class);
 
-/* 
-    GET     /api/produtos
-    POST    /api/produtos
-    GET     /api/produtos/id
-    PUT     /api/produtos/id
-    DELETE  /api/produtos/id
+Route::apiResource('/filamentos', FilamentoController::class);
 
-*/
+Route::get('/cotacao/{moeda?}', [CotacaoController::class, 'api']);

@@ -49,23 +49,20 @@ class ProdutoController extends Controller
         return new ProdutoResource($produto);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Produto $produto)
-    {
-        $dados = $request->validate([
-            'nome' => ['sometimes', 'string', 'max:255'],
-            'descricao' => 'nullable|string',
-            'preco_custo' => ['sometimes', 'numeric', 'min:0'],
-            'preco' => ['sometimes', 'numeric', 'min:0'],
-            'quantidade' => 'sometimes|integer|min:0',
-        ]);
+{
+    $dados = $request->validate([
+        'nome' => ['sometimes', 'string', 'max:255'],
+        'descricao' => 'nullable|string',
+        'preco_custo' => ['sometimes', 'numeric', 'min:0'],
+        'preco' => ['sometimes', 'numeric', 'min:0'],
+        'quantidade' => 'sometimes|integer|min:0',
+    ]);
 
-        $produto->update($dados);
+    $produto = $this->service->update($produto, $dados);
 
-        return new ProdutoResource($produto);
-    }
+    return new ProdutoResource($produto);
+}
 
     /**
      * Remove the specified resource from storage.
